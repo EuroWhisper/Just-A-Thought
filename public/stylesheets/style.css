@@ -1,0 +1,27 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#thoughts {
+	padding-top: 50px;
+}
+.thought {
+	padding: 30px;
+	border-style: solid;
+	border-width: 3px;
+	border-radius: 5px;
+	border-color: #E4F1FE;
+}
+
+.likes-dislikes{
+	text-align: right;
+}
+
+.blockquote-footer{
+	padding-top:20px;
+}

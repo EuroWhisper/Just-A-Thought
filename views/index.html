@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	  <script src="/angular/thoughtApp.js"></script>
+	  <script src="/angular/frontEndController.js"></script>
+	  <script src="/directives/thought.js"></script>
+	  <script src="https://use.fontawesome.com/cd68695584.js"></script>
+	  
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/style.css" rel="stylesheet">
+  </head>
+
+  <body ng-app="thoughtApp" ng-controller="frontEndController">
+
+    <div class="container">
+		
+		<div class="row">
+			<div class="col-lg-6 offset-md-3">
+				<form class="form">
+				  <label class="sr-only" for="inlineFormInput">Name</label>
+				  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput" placeholder="Enter a name..." ng-model="name">
+					<label class="sr-only" for="inlineFormInput">Thought</label>
+				  <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="inlineFormInput2" placeholder="Share a thought..." ng-model="thought">
+					  <button class="btn btn-primary" ng-click="submitThought()">Submit</button>
+				</form>
+			</div>
+			</div>
+			
+			<section id="thoughts">
+				<div class="row">
+				<div class="col-lg-6 offset-md-3">
+					<thought-list class="thought" ng-repeat="thought in thoughts" a-thought="thought"></thought-list>
+				</div>
+					</div>
+			</section>
+			
+		</div>
+		
+
+
+
+
+		
+		
+     <!-- <div class="thought-list" ng-repeat="thought in thoughts">
+        <h2>{{thought.thought}}</h2>
+        <h4>- {{thought.name}}</h4>
+      </div> -->
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+var thoughtApp = angular.module("thoughtApp", []);

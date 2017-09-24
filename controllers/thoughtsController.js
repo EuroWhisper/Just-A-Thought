@@ -11,16 +11,18 @@ exports.getAllThoughts = function(req, res) {
 exports.createThought = function(req, res) {
 	console.log(req.body);
 	
-	// Detect hashtags.
-	// TODO: Modify REGEX so it only matches letters following the hash symbol, instead of also numbers and symbols.
+	// Use Regex to detect hashtags.
 	let hashTags = req.body.thought.match(/#(?:\[[^\]]+\]|\S+)/g);
-	
+	// Strip the hash symbol from each hashtag prior to storage.
+	let rawTags = hashTags.map(function(tag) {
+		return tag.slice(1);
+	});
 	
 	// Create a new Thought object from the POST data.
 	var thought = new Thought({
 		name: req.body.name,
 		thought: req.body.thought,
-		hashTags: hashTags
+		hashTags: rawTags
 	});
 	
 	console.log(thought.hashtags);

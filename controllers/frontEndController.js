@@ -13,6 +13,22 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 		alert('Error! ' + response.data);
 	});
 	
+	$scope.getTaggedThoughts = function(hashtag) {
+		alert("Getting tagged thought for hashtag: " + hashtag);
+		$http({
+			method: 'GET',
+			url: '/thoughts/tags/'+hashtag
+		})
+		.then(function successCallback(response) {
+			alert(response.data);
+			$scope.thoughts = response.data;
+			
+		}, function errorCallback(response) {
+			alert('Error! ' + response.data);
+		
+		});
+	}
+	
 	// Submit a new thought
 	$scope.submitThought = function() {
 		alert("posting");

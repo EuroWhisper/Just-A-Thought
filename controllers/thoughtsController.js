@@ -2,7 +2,13 @@ var Thought = require('../models/thought');
 
 // Retrieve all thoughts from the database.
 exports.getAllThoughts = function(req, res) {
-	Thought.find(function (err, thoughts) {
+	Thought.find(function(err, thoughts) {
+		res.json(thoughts);
+	});
+}
+
+exports.getHashtagThoughts = function(req, res) {
+	Thought.find({hashTags: req.params.hashTag}, function(err, thoughts) {
 		res.json(thoughts);
 	});
 }

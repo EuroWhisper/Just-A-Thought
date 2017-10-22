@@ -19,16 +19,24 @@ exports.createThought = function(req, res) {
 	
 	// Use Regex to detect hashtags.
 	let hashTags = req.body.thought.match(/#(?:\[[^\]]+\]|\S+)/g);
-	// Strip the hash symbol from each hashtag prior to storage.
-	let rawTags = hashTags.map(function(tag) {
-		return tag.slice(1);
-	});
+	
+	// Strip hash symbols from each hashtag prior to storage, if hashtags are detected.
+	if (!hashTags == null) {
+		// Strip the hash symbol from each hashta.
+		hashTags = hashTags.map(function(tag) {
+			return tag.slice(1);
+		});
+	// Else add "general" as the tag.
+	} else {
+		hashTags = "uncategorized";
+	}
+	
 	
 	// Create a new Thought object from the POST data.
 	var thought = new Thought({
 		name: req.body.name,
 		thought: req.body.thought,
-		hashTags: rawTags
+		hashTags: hashTags
 	});
 	
 	console.log(thought.hashtags);

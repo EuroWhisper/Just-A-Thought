@@ -14,21 +14,22 @@ exports.getHashtagThoughts = function(req, res) {
 }
 
 // Create and save a new Thought object
-exports.createThought = function(req, res) {
+exports.createThought = function(req, res, next) {
 	console.log(req.body);
 	
 	// Use Regex to detect hashtags.
-	let hashTags = req.body.thought.match(/#(?:\[[^\]]+\]|\S+)/g);
-	
+	var hashTags = req.body.thought.match(/#(?:\[[^\]]+\]|\S+)/g);
+	var strippedTags;
 	// Strip hash symbols from each hashtag prior to storage, if hashtags are detected.
-	if (!hashTags == null) {
+	if (hashTags !== null) {
 		// Strip the hash symbol from each hashta.
-		hashTags = hashTags.map(function(tag) {
+		strippedTags = hashTags.map(function(tag) {
 			return tag.slice(1);
 		});
+		console.log(strippedTags);
 	// Else add "general" as the tag.
 	} else {
-		hashTags = "uncategorized";
+		strippedTags = "uncategorized";
 	}
 	
 	
@@ -36,14 +37,17 @@ exports.createThought = function(req, res) {
 	var thought = new Thought({
 		name: req.body.name,
 		thought: req.body.thought,
-		hashTags: hashTags
+		hashTags: strippedTags
 	});
 	
-	console.log(thought.hashtags);
-	
+	console.log(thought.hashTags);
+
 	// Save the new thought.
 	thought.save(function(err) {
-		if(err) {return next(err);}
+		if(err) {
+			console.log("error!");
+			return res.json(err);
+		}
 		// Reuse getAllThoughts() to return updated collection of thoughts & prevent duplicate code
 		exports.getAllThoughts(req, res);
 	});

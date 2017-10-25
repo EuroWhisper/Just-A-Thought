@@ -5,9 +5,7 @@ var thoughtsController = require('../controllers/thoughtsController');
 
 router.get('/all', thoughtsController.getAllThoughts);
 
-router.get('/show', function(req, res) {
-	res.send('lol');
-});
+router.get('/tags/:hashTag', thoughtsController.getHashtagThoughts);
 
 router.post('/create', thoughtsController.createThought);
 

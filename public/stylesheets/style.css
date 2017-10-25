@@ -1,5 +1,35 @@
+button.btn-primary{
+	margin-top: 20px;
+  background:#9B59B6;
+	border-color:#9B59B6;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #BE90D4;
+    border-color: #BE90D4;
+}
+
+h2 {
+	color: #AEA8D3;
+}
 body {
-  padding: 50px;
+  
+}
+
+#nameInput {
+	margin-top: 30px;
+}
+
+#thoughtInput {
+	margin-top: 20px;
+}
+#thought-prompt {
+	text-align: center;
+	margin-top: 30px;
+}
+#thought {
+	padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -15,7 +45,11 @@ a {
 	border-style: solid;
 	border-width: 3px;
 	border-radius: 5px;
-	border-color: #E4F1FE;
+	border-color: #F9EAFF;
+}
+
+.thought a {
+	color: #BE90D4;
 }
 
 .likes-dislikes{

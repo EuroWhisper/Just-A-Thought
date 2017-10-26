@@ -14,7 +14,7 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 	});
 	
 	$scope.getTaggedThoughts = function(hashtag) {
-		alert("Getting tagged thought for hashtag: " + hashtag);
+		alert("Getting tagged thought for hashtag: " + JSON.stringify(hashtag));
 		$http({
 			method: 'GET',
 			url: '/thoughts/tags/'+hashtag

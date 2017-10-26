@@ -14,6 +14,11 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 	});
 	
 	$scope.getTaggedThoughts = function(hashtag) {
+		// If the hash symbol prepends the hashtag, remove the hash symbol from the string
+		if (hashtag.indexOf("#") != -1) {
+			hashtag = hashtag.slice(1);
+		}
+		
 		alert("Getting tagged thought for hashtag: " + JSON.stringify(hashtag));
 		$http({
 			method: 'GET',

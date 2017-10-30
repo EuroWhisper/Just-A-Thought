@@ -26,7 +26,14 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 		})
 		.then(function successCallback(response) {
 			alert(response.data);
-			$scope.thoughts = response.data;
+			// If entries exist for hashtag searched for by user, then load corresponding thoughts into controller.
+			if(response.data.length > 0) {
+				$scope.thoughts = response.data;
+			// Else inform user that no thoughts exist for the hashtag they searched for.
+			} else {
+				alert("No thoughts found for the specified hashtag");
+			}
+			
 			
 		}, function errorCallback(response) {
 			alert('Error! Tagged thoughts not retrieved: ' + response.data);

@@ -14,14 +14,26 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 	});
 	
 	$scope.getTaggedThoughts = function(hashtag) {
-		alert("Getting tagged thought for hashtag: " + hashtag);
+		// If the hash symbol prepends the hashtag, remove the hash symbol from the string
+		if (hashtag.indexOf("#") != -1) {
+			hashtag = hashtag.slice(1);
+		}
+		
+		alert("Getting tagged thought for hashtag: " + JSON.stringify(hashtag));
 		$http({
 			method: 'GET',
 			url: '/thoughts/tags/'+hashtag
 		})
 		.then(function successCallback(response) {
 			alert(response.data);
-			$scope.thoughts = response.data;
+			// If entries exist for hashtag searched for by user, then load corresponding thoughts into controller.
+			if(response.data.length > 0) {
+				$scope.thoughts = response.data;
+			// Else inform user that no thoughts exist for the hashtag they searched for.
+			} else {
+				alert("No thoughts found for the specified hashtag");
+			}
+			
 			
 		}, function errorCallback(response) {
 			alert('Error! Tagged thoughts not retrieved: ' + response.data);

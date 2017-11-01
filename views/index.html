@@ -24,20 +24,9 @@
       </button>
       <a class="navbar-brand" href="#">Just A Thought</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="text" placeholder="Search by tag">
-          <button class="btn btn-outline-default my-2 my-sm-0" type="submit">Search</button>
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+          <input id="search-bar" class="form-control mr-sm-2" type="text" placeholder="Search by tag" ng-model="query">
+          <button id="search-button" class="btn btn-outline-default my-2 my-sm-0" ng-click="getTaggedThoughts(query)">Search</button>
         </form>
       </div>
     </nav>
@@ -54,7 +43,7 @@
             <label class="sr-only" for="inlineFormInput">Name</label>
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="nameInput" placeholder="Enter a name..." ng-model="name">
             <label class="sr-only" for="inlineFormInput">Thought</label>
-			  <textarea class="form-control mb-2 mr-sm-2 mb-sm-0" id="thoughtInput" rows="8" placeholder="Share a thought..." ng-model="thought"></textarea>
+			  <textarea class="form-control mb-2 mr-sm-2 mb-sm-0" id="thoughtInput" rows="4" placeholder="Share a thought..." ng-model="thought"></textarea>
             <button class="btn btn-primary" ng-click="submitThought()">Submit</button>
           </form>
         </div>

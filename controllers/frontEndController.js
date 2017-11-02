@@ -1,5 +1,12 @@
 thoughtApp.controller("frontEndController", function($scope, $http) {
 	
+	$scope.displayForm = function() {
+		// Display the thought entry form.
+		document.getElementById("thought-form").setAttribute("style", "display: block;");
+		// Hide the prompt button.
+		document.getElementById("prompt-button").setAttribute("style", "display: none;");
+	}
+	
 	// Retrieve all thoughts
 	$http({
 		method: 'GET',
@@ -52,7 +59,7 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 		})
 		.then(function successCallback(response) {
 			// If the response does not contain a validation error, load thoughts into $scope.
-			if (!response.data.errors === undefined) {
+			if (response.data.errors === undefined) {
 				$scope.thoughts = response.data;
 			// Else the response does contain a validation error, so display it to the user.
 			} else {

@@ -12,7 +12,7 @@ var thoughts = require('./routes/thoughts');
 var app = express();
 
 var mongoose = require('mongoose');
-var mongoDB = 'mongodb://localhost:27017/justathought';
+var mongoDB = process.env.MONGODB_URI || 'mongodb://localhost:27017/justathought';
 mongoose.connect(mongoDB);
 var db = mongoose.connection;
 

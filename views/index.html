@@ -30,16 +30,15 @@
         </form>
       </div>
     </nav>
-    
+	  
 	<div class="container">
       <div class="row">
         <div id="thought-prompt" class="col-lg-12">
           <h2>What's on your mind?</h2>
+			<button id="prompt-button" class="btn btn-primary" ng-click="displayForm()">Share a thought</button>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-6 offset-md-3">
-          <form class="form">
+		  <div class="col-lg-6 offset-md-3">
+          <form id="thought-form" class="form">
             <label class="sr-only" for="inlineFormInput">Name</label>
             <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="nameInput" placeholder="Enter a name..." ng-model="name">
             <label class="sr-only" for="inlineFormInput">Thought</label>
@@ -48,6 +47,9 @@
           </form>
         </div>
       </div>
+    </div>
+    
+	<div class="container">
       <section id="thoughts">
         <div class="row">
           <div class="col-lg-6 offset-md-3">

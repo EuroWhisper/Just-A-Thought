@@ -1,4 +1,4 @@
-thoughtApp.controller("frontEndController", function($scope, $http) {
+thoughtApp.controller("frontEndController", ['$scope', '$http', '$window', function($scope, $http, $window) {
 	
 	$scope.displayForm = function() {
 		// Display the thought entry form.
@@ -48,27 +48,62 @@ thoughtApp.controller("frontEndController", function($scope, $http) {
 		});
 	}
 	
-	// Submit a new thought
-	$scope.submitThought = function() {
-		alert("posting");
-		
+	// Verify whether or not the captcha has been solved.
+	$scope.verifyCaptcha = function(greCaptchaResponse) {
 		$http({
 			method: 'POST',
-			url: '/thoughts/create',
-			data: {name: $scope.name, thought: $scope.thought}
+			url: '/verify-captcha',
+			data: {greCaptchaResponse: greCaptchaResponse}
 		})
 		.then(function successCallback(response) {
-			// If the response does not contain a validation error, load thoughts into $scope.
-			if (response.data.errors === undefined) {
-				$scope.thoughts = response.data;
-			// Else the response does contain a validation error, so display it to the user.
+			alert(response.data);
+			if(response.data === true) {
+				alert("response is true");
+				$scope.submitThought();
 			} else {
-				alert("Error! Thought not saved: " + JSON.stringify(response.data.errors.thought.message));
+				alert("Captcha verification failed.");
 			}
 		}, function errorCallback(response) {
-			// If the http request fails, display the error to the user.
-			alert('Error! Thought not saved: ' + response.thought);
+			alert(response.data);
 		});
 	}
 	
-});
+	$scope.submitThought = function() {
+		$http({
+				method: 'POST',
+				url: '/thoughts/create',
+				data: {name: $scope.name, thought: $scope.thought}
+			})
+			.then(function successCallback(response) {
+				// If the response does not contain a validation error, load thoughts into $scope.
+				if (response.data.errors === undefined) {
+					$scope.thoughts = response.data;
+				// Else the response does contain a validation error, so display it to the user.
+				} else {
+					alert("Error! Thought not saved: " + JSON.stringify(response.data.errors.thought.message));
+				}
+			}, function errorCallback(response) {
+				// If the http request fails, display the error to the user.
+				alert('Error! Thought not saved: ' + response.thought);
+			});
+	}
+	
+	// Submit a new thought
+	$scope.processThought = function() {
+		var greCaptchaResponse;
+		// Get response of captcha
+		//alert($window.grecaptcha.getResponse());
+		
+		// If the grecaptcha response is not empty
+		// store the response in greCaptchaResponse
+		if($window.grecaptcha.getResponse() !== "") {
+			greCaptchaResponse = $window.grecaptcha.getResponse();
+			$scope.verifyCaptcha(greCaptchaResponse);
+		} else {
+			alert("Thought not saved. Captcha must be ticked/completed.");
+		}
+		
+		
+	}
+	
+}]);

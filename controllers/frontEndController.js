@@ -63,6 +63,8 @@ thoughtApp.controller("frontEndController", ['$scope', '$http', '$window', funct
 			} else {
 				alert("Captcha verification failed.");
 			}
+			// Reset the captcha so form can be submitted again.
+			$window.grecaptcha.reset();
 		}, function errorCallback(response) {
 			alert(response.data);
 		});

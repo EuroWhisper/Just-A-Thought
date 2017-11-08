@@ -56,9 +56,7 @@ thoughtApp.controller("frontEndController", ['$scope', '$http', '$window', funct
 			data: {greCaptchaResponse: greCaptchaResponse}
 		})
 		.then(function successCallback(response) {
-			alert(response.data);
 			if(response.data === true) {
-				alert("response is true");
 				$scope.submitThought();
 			} else {
 				alert("Captcha verification failed.");
@@ -80,6 +78,7 @@ thoughtApp.controller("frontEndController", ['$scope', '$http', '$window', funct
 				// If the response does not contain a validation error, load thoughts into $scope.
 				if (response.data.errors === undefined) {
 					$scope.thoughts = response.data;
+					alert("Thought saved successfully!");
 				// Else the response does contain a validation error, so display it to the user.
 				} else {
 					alert("Error! Thought not saved: " + JSON.stringify(response.data.errors.thought.message));
